@@ -1,0 +1,701 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Arena Copacabana - Quadras de Vôlei</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --primary: #FF5722; /* Laranja */
+            --dark: #212121;   /* Preto */
+            --light: #F5F5F5;  /* Branco */
+            --gray: #757575;
+            --transition: all 0.3s ease;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            background-color: var(--light);
+            color: var(--dark);
+            line-height: 1.6;
+        }
+        
+        /* Header e Navegação */
+        header {
+            background-color: var(--dark);
+            color: var(--light);
+            padding: 15px 0;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.2);
+        }
+        
+        .header-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 20px;
+        }
+        
+        .logo {
+            font-size: 28px;
+            font-weight: bold;
+            color: var(--primary);
+        }
+        
+        .header-buttons {
+            display: flex;
+            gap: 15px;
+            align-items: center;
+        }
+        
+        .btn-entrar,
+        .btn-criar-conta {
+            padding: 12px 25px;
+            border-radius: 25px;
+            font-weight: 600;
+            text-decoration: none;
+            transition: var(--transition);
+            font-size: 14px;
+            position: relative;
+            overflow: hidden;
+            cursor: pointer;
+        }
+        
+        .btn-entrar {
+            background-color: transparent;
+            color: var(--light);
+            border: 2px solid var(--primary);
+        }
+        
+        .btn-entrar:hover {
+            background-color: var(--primary);
+            color: var(--light);
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(255, 87, 34, 0.3);
+        }
+        
+        .btn-criar-conta {
+            background-color: var(--primary);
+            color: var(--light);
+            border: 2px solid var(--primary);
+            position: relative;
+        }
+        
+        .btn-criar-conta:hover {
+            background-color: #E64A19;
+            border-color: #E64A19;
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(255, 87, 34, 0.4);
+        }
+        
+        .btn-criar-conta::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+            transition: left 0.5s;
+        }
+        
+        .btn-criar-conta:hover::before {
+            left: 100%;
+        }
+        
+        /* Hero Section */
+        .hero {
+            background: linear-gradient(rgba(0,0,0,0.7), rgba(0,0,0,0.7)), url('https://images.unsplash.com/photo-1592656094267-764a451b7dc3?ixlib=rb-4.0.3&auto=format&fit=crop&w=1500&q=80');
+            background-size: cover;
+            background-position: center;
+            color: var(--light);
+            text-align: center;
+            padding: 100px 20px;
+        }
+        
+        .hero h1 {
+            font-size: 48px;
+            margin-bottom: 20px;
+            color: var(--primary);
+        }
+        
+        .hero-info {
+            max-width: 800px;
+            margin: 0 auto;
+            background-color: rgba(33, 33, 33, 0.8);
+            padding: 20px;
+            border-radius: 10px;
+        }
+        
+        .status {
+            display: inline-block;
+            padding: 5px 15px;
+            background-color: var(--primary);
+            border-radius: 20px;
+            font-weight: bold;
+            margin: 10px 0;
+        }
+        
+        .address {
+            margin: 15px 0;
+        }
+        
+        .cta-button {
+            display: inline-block;
+            margin-top: 20px;
+            padding: 12px 30px;
+            background-color: var(--primary);
+            color: var(--light);
+            text-decoration: none;
+            border-radius: 30px;
+            font-weight: bold;
+            transition: var(--transition);
+        }
+        
+        .cta-button:hover {
+            background-color: var(--light);
+            color: var(--primary);
+            transform: translateY(-3px);
+        }
+        
+        /* Seções */
+        .section {
+            padding: 60px 20px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        .section-title {
+            text-align: center;
+            margin-bottom: 40px;
+            color: var(--dark);
+            position: relative;
+        }
+        
+        .section-title:after {
+            content: '';
+            display: block;
+            width: 80px;
+            height: 4px;
+            background-color: var(--primary);
+            margin: 10px auto;
+        }
+        
+        /* Serviços */
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 30px;
+        }
+        
+        .service-card {
+            background-color: white;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            transition: var(--transition);
+        }
+        
+        .service-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(0,0,0,0.15);
+        }
+        
+        .service-image {
+            height: 200px;
+            background-size: cover;
+            background-position: center;
+        }
+        
+        .service-content {
+            padding: 20px;
+        }
+        
+        .service-title {
+            font-size: 20px;
+            margin-bottom: 10px;
+            color: var(--dark);
+        }
+        
+        .service-price {
+            color: var(--primary);
+            font-weight: bold;
+            font-size: 22px;
+            margin: 10px 0;
+        }
+        
+        .service-button {
+            display: block;
+            width: 100%;
+            padding: 10px;
+            background-color: var(--primary);
+            color: white;
+            border: none;
+            border-radius: 5px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: var(--transition);
+            text-align: center;
+            text-decoration: none;
+        }
+        
+        .service-button:hover {
+            background-color: var(--dark);
+        }
+        
+        /* Filtros */
+        .filters {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            margin-bottom: 30px;
+            flex-wrap: wrap;
+        }
+        
+        .filter-btn {
+            padding: 8px 20px;
+            background-color: white;
+            border: 2px solid var(--primary);
+            border-radius: 30px;
+            cursor: pointer;
+            transition: var(--transition);
+            font-weight: 500;
+        }
+        
+        .filter-btn.active, .filter-btn:hover {
+            background-color: var(--primary);
+            color: white;
+        }
+        
+        /* Quadras */
+        .courts-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+        }
+        
+        .court-card {
+            background-color: white;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            transition: var(--transition);
+        }
+        
+        .court-card:hover {
+            transform: translateY(-5px);
+        }
+        
+        .court-image {
+            height: 180px;
+            background-size: cover;
+            background-position: center;
+        }
+        
+        .court-content {
+            padding: 15px;
+            text-align: center;
+        }
+        
+        .court-button {
+            display: inline-block;
+            margin-top: 10px;
+            padding: 8px 20px;
+            background-color: var(--primary);
+            color: white;
+            text-decoration: none;
+            border-radius: 5px;
+            font-weight: bold;
+            transition: var(--transition);
+        }
+        
+        .court-button:hover {
+            background-color: var(--dark);
+        }
+        
+        /* Sobre */
+        .about-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 40px;
+            align-items: center;
+        }
+        
+        .about-text h3 {
+            color: var(--primary);
+            margin-bottom: 15px;
+        }
+        
+        .about-info {
+            margin-top: 30px;
+        }
+        
+        .info-item {
+            margin-bottom: 15px;
+            display: flex;
+            align-items: flex-start;
+        }
+        
+        .info-item i {
+            color: var(--primary);
+            margin-right: 10px;
+            margin-top: 5px;
+        }
+        
+        /* Horário de Funcionamento */
+        .hours-list {
+            list-style: none;
+        }
+        
+        .hours-list li {
+            display: flex;
+            justify-content: space-between;
+            padding: 8px 0;
+            border-bottom: 1px solid #eee;
+        }
+        
+        /* Footer */
+        footer {
+            background-color: var(--dark);
+            color: var(--light);
+            padding: 40px 20px;
+            text-align: center;
+        }
+        
+        .footer-content {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        .footer-credits {
+            margin-top: 30px;
+            padding-top: 20px;
+            border-top: 1px solid rgba(255,255,255,0.1);
+            font-size: 14px;
+            color: var(--gray);
+        }
+        
+        /* Botão Flutuante WhatsApp */
+        .whatsapp-float {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            width: 60px;
+            height: 60px;
+            background-color: #25d366;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 4px 20px rgba(37, 211, 102, 0.4);
+            z-index: 1000;
+            transition: var(--transition);
+            text-decoration: none;
+            animation: pulse 2s infinite;
+        }
+        
+        .whatsapp-float:hover {
+            background-color: #128c7e;
+            transform: scale(1.1);
+            box-shadow: 0 6px 25px rgba(37, 211, 102, 0.6);
+        }
+        
+        .whatsapp-float i {
+            color: white;
+            font-size: 28px;
+        }
+        
+        .whatsapp-tooltip {
+            position: absolute;
+            right: 70px;
+            top: 50%;
+            transform: translateY(-50%);
+            background-color: var(--dark);
+            color: white;
+            padding: 8px 12px;
+            border-radius: 6px;
+            white-space: nowrap;
+            opacity: 0;
+            visibility: hidden;
+            transition: var(--transition);
+            font-size: 14px;
+        }
+        
+        .whatsapp-tooltip::after {
+            content: '';
+            position: absolute;
+            right: -5px;
+            top: 50%;
+            transform: translateY(-50%);
+            border-left: 5px solid var(--dark);
+            border-top: 5px solid transparent;
+            border-bottom: 5px solid transparent;
+        }
+        
+        .whatsapp-float:hover .whatsapp-tooltip {
+            opacity: 1;
+            visibility: visible;
+        }
+        
+        @keyframes pulse {
+            0% {
+                box-shadow: 0 4px 20px rgba(37, 211, 102, 0.4);
+            }
+            50% {
+                box-shadow: 0 4px 20px rgba(37, 211, 102, 0.7);
+            }
+            100% {
+                box-shadow: 0 4px 20px rgba(37, 211, 102, 0.4);
+            }
+        }
+        
+        /* Responsividade do WhatsApp */
+        @media (max-width: 768px) {
+            .whatsapp-float {
+                bottom: 20px;
+                right: 20px;
+                width: 55px;
+                height: 55px;
+            }
+            
+            .whatsapp-float i {
+                font-size: 24px;
+            }
+            
+            .whatsapp-tooltip {
+                display: none;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header com Login -->
+    <header>
+        <div class="header-container">
+            <div class="logo">ARENA COPACABANA</div>
+            <div class="header-buttons">
+                <a href="login.html" class="btn-entrar">Entrar</a>
+                <a href="login.html" class="btn-criar-conta">Criar Conta</a>
+            </div>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <h1>ARENA COPACABANA</h1>
+        <div class="hero-info">
+            <div class="status">Aberto (16:00 – 20:00)</div>
+            <div class="address">
+                <i class="fas fa-map-marker-alt"></i> 
+                Rua Doutor Orlando Van Erven Filho 250, São José do Rio Preto
+            </div>
+            <a href="#" class="cta-button">Obter direções</a>
+        </div>
+    </section>
+
+    <!-- Serviços -->
+    <section class="section">
+        <h2 class="section-title">Serviços</h2>
+        
+        <div class="filters">
+            <button class="filter-btn active">Todos os serviços</button>
+            <button class="filter-btn">Aluguel de quadras</button>
+            <button class="filter-btn">Outros serviços</button>
+        </div>
+        
+        <div class="services-grid">
+            <!-- Beach Tênis -->
+            <div class="service-card">
+                <div class="service-image" style="background-image: url('https://revistaipe.com.br/wp-content/uploads/2022/10/ANG_0080.jpg');"></div>
+                <div class="service-content">
+                    <h3 class="service-title">BEACH TÊNIS</h3>
+                    <p class="service-price">R$ 80</p>
+                    <p>Quadras de beach tênis para aluguel por hora</p>
+                    <a href="selecionar-quadras.html" class="service-button">Reservar</a>
+                </div>
+            </div>
+            
+            <!-- Futevôlei -->
+            <div class="service-card">
+                <div class="service-image" style="background-image: url('https://www.orlario.com.br/wp-content/uploads/2020/08/Futevolei-1.jpg');"></div>
+                <div class="service-content">
+                    <h3 class="service-title">FUTEVÔLEI</h3>
+                    <p class="service-price">R$ 80</p>
+                    <p>Quadras de futevôlei para aluguel por hora</p>
+                    <a href="selecionar-quadras.html" class="service-button">Reservar</a>
+                </div>
+            </div>
+            
+            <!-- Vôlei de Areia -->
+            <div class="service-card">
+                <div class="service-image" style="background-image: url('https://images.unsplash.com/photo-1612872087720-bb876e2e67d1?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80');"></div>
+                <div class="service-content">
+                    <h3 class="service-title">VÔLEI DE AREIA</h3>
+                    <p class="service-price">R$ 80</p>
+                    <p>Quadras de vôlei de areia para aluguel por hora</p>
+                    <a href="selecionar-quadras.html" class="service-button">Reservar</a>
+                </div>
+            </div>
+            
+            <!-- Churrasco -->
+            <div class="service-card">
+                <div class="service-image" style="background-image: url('https://p2.trrsf.com/image/fget/cf/500/0/images.terra.com/2019/09/13/area-de-churrasco-pequena-com-fogao-a-lenha.jpg');"></div>
+                <div class="service-content">
+                    <h3 class="service-title">CHURRASCO - RESERVA DE ESPAÇO</h3>
+                    <p class="service-price">R$ 80</p>
+                    <p>Espaço para churrasco com capacidade para até 30 pessoas</p>
+                    <a href="selecionar-quadras.html" class="service-button">Reservar</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Quadras -->
+    <section class="section" style="background-color: #f9f9f9;">
+        <h2 class="section-title">Nossas Quadras</h2>
+        
+        <div class="courts-grid">
+            <!-- Quadra 01 -->
+            <div class="court-card">
+                <div class="court-image" style="background-image: url('https://images.unsplash.com/photo-1592656094267-764a451b7dc3?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80');"></div>
+                <div class="court-content">
+                    <h3>QUADRA 01</h3>
+                    <p>Vôlei de Praia</p>
+                    <a href="selecionar-quadras.html" class="court-button">Reservar agora</a>
+                </div>
+            </div>
+            
+            <!-- Quadra 02 -->
+            <div class="court-card">
+                <div class="court-image" style="background-image: url('https://images.unsplash.com/photo-1532274402911-5a369e4c4bb5?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80');"></div>
+                <div class="court-content">
+                    <h3>QUADRA 02</h3>
+                    <p>Beach Tênis</p>
+                    <a href="selecionar-quadras.html" class="court-button">Reservar agora</a>
+                </div>
+            </div>
+            
+            <!-- Quadra 03 -->
+            <div class="court-card">
+                <div class="court-image" style="background-image: url('https://images.unsplash.com/photo-1636516645511-6a96d5a24368?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80');"></div>
+                <div class="court-content">
+                    <h3>QUADRA 03</h3>
+                    <p>Futevôlei</p>
+                    <a href="selecionar-quadras.html" class="court-button">Reservar agora</a>
+                </div>
+            </div>
+            
+            <!-- Quadra 04 -->
+            <div class="court-card">
+                <div class="court-image" style="background-image: url('https://images.unsplash.com/photo-1612872087720-bb876e2e67d1?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80');"></div>
+                <div class="court-content">
+                    <h3>QUADRA 04</h3>
+                    <p>Vôlei de Praia</p>
+                    <a href="selecionar-quadras.html" class="court-button">Reservar agora</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Sobre nós -->
+    <section class="section">
+        <h2 class="section-title">Sobre Nós</h2>
+        
+        <div class="about-content">
+            <div class="about-text">
+                <h3>ESPORTES NA AREIA</h3>
+                <p>Atendemos nosso público com aluguel de quadras e aulas esportivas... Aqui formamos pessoas e atletas. Em nossas aulas, disseminamos a atividade física e todo o bem estar que ela proporciona, oferecemos entretenimento a população local e regional.</p>
+                <p>Somos uma empresa que se distingue no mercado pela qualidade de sua estrutura, sendo nosso objetivo principal a satisfação dos clientes, cumprindo sempre com responsabilidade as tarefas que lhes são confiadas.</p>
+                
+                <div class="about-info">
+                    <div class="info-item">
+                        <i class="fas fa-map-marker-alt"></i>
+                        <div>
+                            <strong>Endereço</strong><br>
+                            Rua Doutor Orlando Van Erven Filho 250, São José do Rio Preto
+                        </div>
+                    </div>
+                    
+                    <div class="info-item">
+                        <i class="fas fa-phone"></i>
+                        <div>
+                            <strong>Telefone</strong><br>
+                            +55 17 99787 8589
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="about-hours">
+                <h3>Horário de Funcionamento</h3>
+                <ul class="hours-list">
+                    <li><span>Domingo</span> <span>17:00 – 20:00</span></li>
+                    <li><span>Segunda-feira</span> <span>17:00 – 23:00</span></li>
+                    <li><span>Terça-feira</span> <span>17:00 – 23:00</span></li>
+                    <li><span>Quarta-feira</span> <span>17:00 – 23:00</span></li>
+                    <li><span>Quinta-feira</span> <span>17:00 – 23:00</span></li>
+                    <li><span>Sexta-feira</span> <span>17:00 – 23:00</span></li>
+                    <li><span>Sábado</span> <span>09:00 – 12:00, 16:00 – 20:00</span></li>
+                </ul>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="footer-content">
+            <div class="logo" style="color: var(--primary); margin-bottom: 20px;">ARENA COPACABANA</div>
+            
+            <div class="footer-credits">
+                <p>© 2025 Arena Copacabana. Todos os direitos reservados.</p>
+                <p>O melhor local para praticar esportes de areia em São José do Rio Preto.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Botão Flutuante WhatsApp -->
+    <a href="https://api.whatsapp.com/send?phone=5517997878589&text=Olá! Gostaria de fazer uma reserva na Arena Copacabana." class="whatsapp-float" target="_blank" rel="noopener noreferrer">
+        <i class="fab fa-whatsapp"></i>
+        <div class="whatsapp-tooltip">Fale conosco no WhatsApp</div>
+    </a>
+
+    <script>
+        // Filtros de serviços
+        const filterButtons = document.querySelectorAll('.filter-btn');
+        
+        filterButtons.forEach(button => {
+            button.addEventListener('click', () => {
+                // Remove a classe active de todos os botões
+                filterButtons.forEach(btn => btn.classList.remove('active'));
+                
+                // Adiciona a classe active ao botão clicado
+                button.classList.add('active');
+                
+                // Aqui iria a lógica para filtrar os serviços
+                // Por simplicidade, não implementei a funcionalidade completa
+            });
+        });
+        
+        // Simulação de login (apresentacional)
+        const authButtons = document.querySelectorAll('.auth-btn');
+        
+        authButtons.forEach(button => {
+            button.addEventListener('click', () => {
+                const action = button.textContent;
+                alert(`Funcionalidade de ${action} será implementada aqui.`);
+            });
+        });
+    </script>
+</body>
+</html>

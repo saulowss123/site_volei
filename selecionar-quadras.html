@@ -1,0 +1,1276 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Selecionar Quadra - Arena Copacabana</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --primary: #FF5722; /* Laranja */
+            --dark: #212121;   /* Preto */
+            --light: #F5F5F5;  /* Branco */
+            --gray: #757575;
+            --green: #4CAF50;
+            --transition: all 0.3s ease;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            background-color: var(--light);
+            color: var(--dark);
+            line-height: 1.6;
+        }
+        
+        /* Header */
+        header {
+            background-color: var(--dark);
+            color: var(--light);
+            padding: 15px 0;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.2);
+        }
+        
+        .header-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 20px;
+        }
+        
+        .header-left {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+        }
+        
+        .btn-voltar {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            color: var(--light);
+            text-decoration: none;
+            transition: var(--transition);
+            font-weight: 500;
+        }
+        
+        .btn-voltar:hover {
+            color: var(--primary);
+        }
+        
+        .logo {
+            font-size: 24px;
+            font-weight: bold;
+            color: var(--primary);
+        }
+        
+        .btn-entrar {
+            padding: 10px 20px;
+            background-color: transparent;
+            color: var(--light);
+            border: 2px solid var(--primary);
+            border-radius: 25px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: var(--transition);
+        }
+        
+        .btn-entrar:hover {
+            background-color: var(--primary);
+            color: var(--light);
+        }
+        
+        /* Container Principal */
+        .main-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 30px 20px;
+            display: grid;
+            grid-template-columns: 1fr 350px;
+            gap: 40px;
+        }
+        
+        /* Seção de Seleção */
+        .selection-section {
+            background-color: white;
+            border-radius: 10px;
+            padding: 30px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+        
+        .section-title {
+            font-size: 24px;
+            margin-bottom: 20px;
+            color: var(--dark);
+        }
+        
+        /* Busca */
+        .search-container {
+            margin-bottom: 30px;
+            position: relative;
+        }
+        
+        .search-input {
+            width: 100%;
+            padding: 15px 45px 15px 15px;
+            border: 2px solid #ddd;
+            border-radius: 8px;
+            font-size: 16px;
+            transition: var(--transition);
+        }
+        
+        .search-input:focus {
+            border-color: var(--primary);
+            outline: none;
+        }
+        
+        .search-icon {
+            position: absolute;
+            right: 15px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: var(--gray);
+        }
+        
+        /* Opção Qualquer Pessoa */
+        .any-option {
+            background-color: var(--green);
+            color: white;
+            padding: 15px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            cursor: pointer;
+            transition: var(--transition);
+        }
+        
+        .any-option:hover {
+            background-color: #45a049;
+        }
+        
+        .any-option.selected {
+            background-color: #388e3c;
+            box-shadow: 0 0 0 3px rgba(76, 175, 80, 0.3);
+        }
+        
+        /* Lista de Quadras */
+        .courts-list {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+        
+        .court-item {
+            background-color: #f9f9f9;
+            border: 2px solid transparent;
+            border-radius: 8px;
+            padding: 20px;
+            cursor: pointer;
+            transition: var(--transition);
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+        
+        .court-item:hover {
+            background-color: #f0f0f0;
+            border-color: var(--primary);
+        }
+        
+        .court-item.selected {
+            background-color: #fff3e0;
+            border-color: var(--primary);
+            box-shadow: 0 0 0 3px rgba(255, 87, 34, 0.1);
+        }
+        
+        .court-icon {
+            width: 50px;
+            height: 50px;
+            background-color: var(--primary);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 20px;
+        }
+        
+        .court-info h3 {
+            font-size: 18px;
+            margin-bottom: 5px;
+        }
+        
+        .court-status {
+            color: var(--green);
+            font-size: 14px;
+            font-weight: 500;
+        }
+        
+        /* Resumo da Reserva */
+        .summary-section {
+            background-color: white;
+            border-radius: 10px;
+            padding: 25px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            height: fit-content;
+            position: sticky;
+            top: 30px;
+        }
+        
+        .summary-title {
+            font-size: 20px;
+            margin-bottom: 20px;
+            color: var(--dark);
+            border-bottom: 2px solid var(--primary);
+            padding-bottom: 10px;
+        }
+        
+        .summary-item {
+            margin-bottom: 20px;
+            padding-bottom: 15px;
+            border-bottom: 1px solid #eee;
+        }
+        
+        .summary-item:last-of-type {
+            border-bottom: none;
+            margin-bottom: 25px;
+        }
+        
+        .summary-label {
+            font-size: 14px;
+            color: var(--gray);
+            margin-bottom: 5px;
+        }
+        
+        .summary-value {
+            font-weight: 600;
+            color: var(--dark);
+        }
+        
+        .summary-address {
+            font-size: 14px;
+            color: var(--gray);
+            margin-top: 5px;
+        }
+        
+        .summary-price {
+            font-size: 24px;
+            color: var(--primary);
+        }
+        
+        .summary-total {
+            background-color: var(--light);
+            padding: 15px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+        }
+        
+        .total-label {
+            font-size: 16px;
+            font-weight: 600;
+            margin-bottom: 5px;
+        }
+        
+        .total-price {
+            font-size: 28px;
+            font-weight: bold;
+            color: var(--primary);
+        }
+        
+        .btn-continuar {
+            width: 100%;
+            padding: 15px;
+            background-color: var(--primary);
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: var(--transition);
+            margin-bottom: 15px;
+        }
+        
+        .btn-continuar:hover {
+            background-color: #e64a19;
+        }
+        
+        .btn-continuar:disabled {
+            background-color: var(--gray);
+            cursor: not-allowed;
+        }
+        
+        /* Seção de Horários */
+        .schedule-section {
+            margin-top: 30px;
+            padding: 20px;
+            background-color: #f9f9f9;
+            border-radius: 8px;
+            display: none;
+        }
+        
+        .schedule-section.show {
+            display: block;
+        }
+        
+        .schedule-title {
+            font-size: 18px;
+            margin-bottom: 20px;
+            color: var(--dark);
+            text-align: center;
+        }
+        
+        .days-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+            gap: 15px;
+            margin-bottom: 25px;
+        }
+        
+        .day-card {
+            background-color: white;
+            border: 2px solid #ddd;
+            border-radius: 8px;
+            padding: 15px 10px;
+            text-align: center;
+            cursor: pointer;
+            transition: var(--transition);
+        }
+        
+        .day-card.available {
+            border-color: var(--green);
+        }
+        
+        .day-card.occupied {
+            border-color: #f44336;
+            background-color: #ffebee;
+            cursor: not-allowed;
+        }
+        
+        .day-card.selected {
+            background-color: var(--primary);
+            color: white;
+            border-color: var(--primary);
+        }
+        
+        .day-name {
+            font-weight: 600;
+            font-size: 14px;
+            margin-bottom: 5px;
+        }
+        
+        .day-date {
+            font-size: 12px;
+            color: var(--gray);
+        }
+        
+        .day-card.selected .day-date {
+            color: white;
+        }
+        
+        .day-status {
+            font-size: 11px;
+            margin-top: 5px;
+            font-weight: 500;
+        }
+        
+        .available-status {
+            color: var(--green);
+        }
+        
+        .occupied-status {
+            color: #f44336;
+        }
+        
+        /* Horários Disponíveis */
+        .time-slots {
+            display: none;
+        }
+        
+        .time-slots.show {
+            display: block;
+        }
+        
+        .time-slots-title {
+            font-size: 16px;
+            margin-bottom: 15px;
+            color: var(--dark);
+        }
+        
+        .time-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
+            gap: 10px;
+        }
+        
+        .time-slot {
+            background-color: white;
+            border: 2px solid var(--green);
+            border-radius: 5px;
+            padding: 10px;
+            text-align: center;
+            cursor: pointer;
+            transition: var(--transition);
+            font-weight: 500;
+            color: var(--green);
+        }
+        
+        .time-slot:hover {
+            background-color: var(--green);
+            color: white;
+        }
+        
+        .time-slot.selected {
+            background-color: var(--primary);
+            border-color: var(--primary);
+            color: white;
+        }
+        
+        .time-slot.occupied {
+            background-color: #ffebee;
+            border-color: #f44336;
+            color: #f44336;
+            cursor: not-allowed;
+        }
+        
+        /* Modal */
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0,0,0,0.5);
+            animation: fadeIn 0.3s ease;
+        }
+        
+        .modal.show {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .modal-content {
+            background-color: white;
+            border-radius: 10px;
+            width: 90%;
+            max-width: 500px;
+            max-height: 90vh;
+            overflow-y: auto;
+            animation: slideIn 0.3s ease;
+        }
+        
+        @keyframes slideIn {
+            from { transform: translateY(-50px); opacity: 0; }
+            to { transform: translateY(0); opacity: 1; }
+        }
+        
+        .modal-header {
+            background-color: var(--dark);
+            color: white;
+            padding: 20px;
+            border-radius: 10px 10px 0 0;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .modal-title {
+            font-size: 20px;
+            color: var(--primary);
+        }
+        
+        .modal-close {
+            background: none;
+            border: none;
+            color: white;
+            font-size: 24px;
+            cursor: pointer;
+            transition: var(--transition);
+        }
+        
+        .modal-close:hover {
+            color: var(--primary);
+        }
+        
+        .modal-body {
+            padding: 25px;
+        }
+        
+        .reservation-summary {
+            background-color: var(--light);
+            padding: 20px;
+            border-radius: 8px;
+            margin-bottom: 25px;
+        }
+        
+        .summary-row {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 10px;
+        }
+        
+        .summary-label {
+            color: var(--gray);
+            font-weight: 500;
+        }
+        
+        .summary-value {
+            font-weight: 600;
+            color: var(--dark);
+        }
+        
+        .form-group {
+            margin-bottom: 20px;
+        }
+        
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 600;
+            color: var(--dark);
+        }
+        
+        .form-control {
+            width: 100%;
+            padding: 12px;
+            border: 2px solid #ddd;
+            border-radius: 5px;
+            font-size: 16px;
+            transition: var(--transition);
+        }
+        
+        .form-control:focus {
+            border-color: var(--primary);
+            outline: none;
+        }
+        
+        .payment-options {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 10px;
+        }
+        
+        .payment-option {
+            background-color: white;
+            border: 2px solid #ddd;
+            border-radius: 8px;
+            padding: 15px;
+            text-align: center;
+            cursor: pointer;
+            transition: var(--transition);
+        }
+        
+        .payment-option:hover {
+            border-color: var(--primary);
+        }
+        
+        .payment-option.selected {
+            background-color: var(--primary);
+            color: white;
+            border-color: var(--primary);
+        }
+        
+        .payment-icon {
+            font-size: 24px;
+            margin-bottom: 8px;
+        }
+        
+        .modal-actions {
+            display: flex;
+            gap: 15px;
+            margin-top: 25px;
+        }
+        
+        .btn-cancelar {
+            flex: 1;
+            padding: 12px;
+            background-color: transparent;
+            color: var(--gray);
+            border: 2px solid var(--gray);
+            border-radius: 5px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: var(--transition);
+        }
+        
+        .btn-cancelar:hover {
+            background-color: var(--gray);
+            color: white;
+        }
+        
+        .btn-confirmar {
+            flex: 2;
+            padding: 12px;
+            background-color: var(--primary);
+            color: white;
+            border: none;
+            border-radius: 5px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: var(--transition);
+        }
+        
+        .btn-confirmar:hover {
+            background-color: #e64a19;
+        }
+        
+        .btn-confirmar:disabled {
+            background-color: var(--gray);
+            cursor: not-allowed;
+        }
+        
+        /* Footer */
+        footer {
+            background-color: var(--dark);
+            color: var(--light);
+            padding: 40px 20px 20px 20px;
+            margin-top: 40px;
+        }
+        
+        .footer-content {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: 2fr 1fr 1fr;
+            gap: 40px;
+        }
+        
+        .footer-section h3 {
+            color: var(--primary);
+            margin-bottom: 15px;
+            font-size: 18px;
+        }
+        
+        .footer-section p,
+        .footer-section li {
+            color: var(--light);
+            margin-bottom: 8px;
+            line-height: 1.6;
+        }
+        
+        .footer-section ul {
+            list-style: none;
+        }
+        
+        .footer-section a {
+            color: var(--light);
+            text-decoration: none;
+            transition: var(--transition);
+        }
+        
+        .footer-section a:hover {
+            color: var(--primary);
+        }
+        
+        .footer-contact i {
+            color: var(--primary);
+            margin-right: 8px;
+            width: 16px;
+        }
+        
+        .footer-social {
+            display: flex;
+            gap: 15px;
+            margin-top: 15px;
+        }
+        
+        .social-link {
+            width: 40px;
+            height: 40px;
+            background-color: var(--primary);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 18px;
+            transition: var(--transition);
+        }
+        
+        .social-link:hover {
+            background-color: #e64a19;
+            transform: translateY(-2px);
+        }
+        
+        .footer-bottom {
+            border-top: 1px solid rgba(255,255,255,0.1);
+            margin-top: 30px;
+            padding-top: 20px;
+            text-align: center;
+            color: var(--gray);
+            font-size: 14px;
+        }
+        
+        /* Responsividade */
+        @media (max-width: 768px) {
+            .main-container {
+                grid-template-columns: 1fr;
+                gap: 20px;
+                padding: 20px 15px;
+            }
+            
+            .summary-section {
+                position: static;
+                order: -1;
+            }
+            
+            .header-container {
+                padding: 0 15px;
+            }
+            
+            .selection-section,
+            .summary-section {
+                padding: 20px;
+            }
+            
+            .days-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+            
+            .time-grid {
+                grid-template-columns: repeat(3, 1fr);
+            }
+            
+            .payment-options {
+                grid-template-columns: 1fr;
+            }
+            
+            .footer-content {
+                grid-template-columns: 1fr;
+                gap: 25px;
+            }
+        }
+        
+        /* Remover footer-credits da sidebar */
+        .footer-credits {
+            display: none;
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <div class="header-container">
+            <div class="header-left">
+                <a href="index.html" class="btn-voltar">
+                    <i class="fas fa-arrow-left"></i>
+                    Voltar
+                </a>
+                <div class="logo">ARENA COPACABANA</div>
+            </div>
+            <a href="login.html" class="btn-entrar">Entrar</a>
+        </div>
+    </header>
+
+    <!-- Container Principal -->
+    <div class="main-container">
+        <!-- Seção de Seleção -->
+        <div class="selection-section">
+            <h2 class="section-title">Escolha uma quadra</h2>
+            
+            <!-- Busca -->
+            <div class="search-container">
+                <input type="text" class="search-input" placeholder="Procurar membro da equipe…">
+                <i class="fas fa-search search-icon"></i>
+            </div>
+            
+            <!-- Qualquer Pessoa Disponível -->
+            <div class="any-option" onclick="selectOption('any')">
+                <i class="fas fa-users"></i>
+                <span>Qualquer pessoa disponível</span>
+            </div>
+            
+            <!-- Lista de Quadras -->
+            <div class="courts-list">
+                <div class="court-item" onclick="selectCourt('quadra01')">
+                    <div class="court-icon">
+                        <i class="fas fa-volleyball-ball"></i>
+                    </div>
+                    <div class="court-info">
+                        <h3>QUADRA 01</h3>
+                        <div class="court-status">Disponível</div>
+                    </div>
+                </div>
+                
+                <div class="court-item" onclick="selectCourt('quadra02')">
+                    <div class="court-icon">
+                        <i class="fas fa-volleyball-ball"></i>
+                    </div>
+                    <div class="court-info">
+                        <h3>QUADRA 02</h3>
+                        <div class="court-status">Disponível</div>
+                    </div>
+                </div>
+                
+                <div class="court-item" onclick="selectCourt('quadra03')">
+                    <div class="court-icon">
+                        <i class="fas fa-volleyball-ball"></i>
+                    </div>
+                    <div class="court-info">
+                        <h3>QUADRA 03</h3>
+                        <div class="court-status">Disponível</div>
+                    </div>
+                </div>
+                
+                <div class="court-item" onclick="selectCourt('quadra04')">
+                    <div class="court-icon">
+                        <i class="fas fa-volleyball-ball"></i>
+                    </div>
+                    <div class="court-info">
+                        <h3>QUADRA 04</h3>
+                        <div class="court-status">Disponível</div>
+                    </div>
+                </div>
+                
+                <div class="court-item" onclick="selectCourt('quadra05')">
+                    <div class="court-icon">
+                        <i class="fas fa-volleyball-ball"></i>
+                    </div>
+                    <div class="court-info">
+                        <h3>QUADRA 05</h3>
+                        <div class="court-status">Disponível</div>
+                    </div>
+                </div>
+                
+                <div class="court-item" onclick="selectCourt('quadra06')">
+                    <div class="court-icon">
+                        <i class="fas fa-volleyball-ball"></i>
+                    </div>
+                    <div class="court-info">
+                        <h3>QUADRA 06</h3>
+                        <div class="court-status">Disponível</div>
+                    </div>
+                </div>
+                
+                <div class="court-item" onclick="selectCourt('quadra07')">
+                    <div class="court-icon">
+                        <i class="fas fa-volleyball-ball"></i>
+                    </div>
+                    <div class="court-info">
+                        <h3>QUADRA 07</h3>
+                        <div class="court-status">Disponível</div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Seção de Horários -->
+            <div class="schedule-section" id="schedule-section">
+                <h3 class="schedule-title">Selecione o dia e horário</h3>
+                
+                <!-- Dias da Semana -->
+                <div class="days-grid" id="days-grid">
+                    <!-- Dias serão gerados dinamicamente -->
+                </div>
+                
+                <!-- Horários Disponíveis -->
+                <div class="time-slots" id="time-slots">
+                    <h4 class="time-slots-title">Horários disponíveis</h4>
+                    <div class="time-grid" id="time-grid">
+                        <!-- Horários serão gerados dinamicamente -->
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Resumo da Reserva -->
+        <div class="summary-section">
+            <h3 class="summary-title">Resumo</h3>
+            
+            <div class="summary-item">
+                <div class="summary-label">ARENA COPACABANA</div>
+                <div class="summary-value">ARENA COPACABANA</div>
+                <div class="summary-address">Rua Doutor Orlando Van Erven Filho 250, São José do Rio Preto</div>
+            </div>
+            
+            <div class="summary-item">
+                <div class="summary-label">Serviço</div>
+                <div class="summary-value">FUTEVÔLEI</div>
+            </div>
+            
+            <div class="summary-item">
+                <div class="summary-label">Preço</div>
+                <div class="summary-value summary-price">R$ 80</div>
+            </div>
+            
+            <div class="summary-item">
+                <div class="summary-label">Duração</div>
+                <div class="summary-value">1 hora</div>
+            </div>
+            
+            <div class="summary-total">
+                <div class="total-label">Total</div>
+                <div class="total-price">R$ 80</div>
+            </div>
+            
+            <button class="btn-continuar" disabled>Selecione uma quadra</button>
+        </div>
+    </div>
+
+    <!-- Modal de Confirmação -->
+    <div class="modal" id="confirmationModal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3 class="modal-title">Confirmar Reserva</h3>
+                <button class="modal-close" onclick="closeModal()">&times;</button>
+            </div>
+            
+            <div class="modal-body">
+                <div class="reservation-summary" id="reservation-summary">
+                    <!-- Resumo será preenchido dinamicamente -->
+                </div>
+                
+                <div class="form-group">
+                    <label for="num-people">Quantas pessoas?</label>
+                    <input type="number" id="num-people" class="form-control" min="1" max="20" value="2" required>
+                </div>
+                
+                <div class="form-group">
+                    <label>Forma de Pagamento</label>
+                    <div class="payment-options">
+                        <div class="payment-option" onclick="selectPayment('pix')">
+                            <div class="payment-icon">
+                                <i class="fas fa-qrcode"></i>
+                            </div>
+                            <div>PIX</div>
+                        </div>
+                        <div class="payment-option" onclick="selectPayment('cartao')">
+                            <div class="payment-icon">
+                                <i class="fas fa-credit-card"></i>
+                            </div>
+                            <div>Cartão</div>
+                        </div>
+                        <div class="payment-option" onclick="selectPayment('local')">
+                            <div class="payment-icon">
+                                <i class="fas fa-money-bill-wave"></i>
+                            </div>
+                            <div>No Local</div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="modal-actions">
+                    <button class="btn-cancelar" onclick="closeModal()">Cancelar</button>
+                    <button class="btn-confirmar" id="btn-confirmar" onclick="confirmReservation()">Confirmar Reserva</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer>
+        <div class="footer-content">
+            <div class="footer-section">
+                <h3>Arena Copacabana</h3>
+                <p>O melhor local para praticar esportes de areia em São José do Rio Preto. Oferecemos quadras profissionais para vôlei de praia, beach tênis, futevôlei e espaço para eventos.</p>
+                <div class="footer-social">
+                    <a href="#" class="social-link"><i class="fab fa-facebook-f"></i></a>
+                    <a href="#" class="social-link"><i class="fab fa-instagram"></i></a>
+                    <a href="https://api.whatsapp.com/send?phone=5517997878589" class="social-link"><i class="fab fa-whatsapp"></i></a>
+                </div>
+            </div>
+            
+            <div class="footer-section">
+                <h3>Contato</h3>
+                <div class="footer-contact">
+                    <p><i class="fas fa-map-marker-alt"></i> Rua Doutor Orlando Van Erven Filho 250</p>
+                    <p><i class="fas fa-city"></i> São José do Rio Preto - SP</p>
+                    <p><i class="fas fa-phone"></i> (17) 99787-8589</p>
+                    <p><i class="fas fa-envelope"></i> contato@arenacopacabana.com</p>
+                </div>
+            </div>
+            
+            <div class="footer-section">
+                <h3>Horário de Funcionamento</h3>
+                <ul>
+                    <li>Segunda à Sexta: 17:00 - 23:00</li>
+                    <li>Sábado: 09:00 - 12:00, 16:00 - 20:00</li>
+                    <li>Domingo: 17:00 - 20:00</li>
+                </ul>
+            </div>
+        </div>
+        
+        <div class="footer-bottom">
+            <p>© 2025 Arena Copacabana. Todos os direitos reservados.</p>
+        </div>
+    </footer>
+
+    <script>
+        let selectedOption = null;
+        let selectedDay = null;
+        let selectedTime = null;
+        let selectedPayment = null;
+        
+        // Dados de exemplo dos horários ocupados
+        const occupiedSlots = {
+            'segunda': ['09:00', '14:00', '19:00'],
+            'terca': ['10:00', '16:00'],
+            'quarta': ['11:00', '15:00', '20:00'],
+            'quinta': ['08:00', '17:00'],
+            'sexta': ['12:00', '18:00', '21:00'],
+            'sabado': ['09:00', '13:00', '16:00', '19:00'],
+            'domingo': ['10:00', '15:00']
+        };
+        
+        // Horários disponíveis (das 8h às 22h)
+        const availableHours = [
+            '08:00', '09:00', '10:00', '11:00', '12:00', '13:00', '14:00',
+            '15:00', '16:00', '17:00', '18:00', '19:00', '20:00', '21:00', '22:00'
+        ];
+
+        function selectCourt(courtId) {
+            // Remove seleção anterior
+            document.querySelectorAll('.any-option, .court-item').forEach(item => {
+                item.classList.remove('selected');
+            });
+            
+            // Seleciona a quadra clicada
+            event.target.closest('.court-item').classList.add('selected');
+            selectedOption = courtId;
+            
+            // Mostra seção de horários
+            showScheduleSection();
+            generateWeekDays();
+            
+            updateContinueButton();
+        }
+        
+        function showScheduleSection() {
+            document.getElementById('schedule-section').classList.add('show');
+        }
+        
+        function generateWeekDays() {
+            const daysGrid = document.getElementById('days-grid');
+            const days = ['domingo', 'segunda', 'terca', 'quarta', 'quinta', 'sexta', 'sabado'];
+            const dayNames = ['Dom', 'Seg', 'Ter', 'Qua', 'Qui', 'Sex', 'Sáb'];
+            
+            daysGrid.innerHTML = '';
+            
+            const today = new Date();
+            
+            days.forEach((day, index) => {
+                const date = new Date(today);
+                date.setDate(today.getDate() + index);
+                
+                const occupiedToday = occupiedSlots[day] || [];
+                const availableCount = availableHours.length - occupiedToday.length;
+                const isAvailable = availableCount > 0;
+                
+                const dayCard = document.createElement('div');
+                dayCard.className = `day-card ${isAvailable ? 'available' : 'occupied'}`;
+                dayCard.onclick = isAvailable ? () => selectDay(day, dayCard) : null;
+                
+                dayCard.innerHTML = `
+                    <div class="day-name">${dayNames[index]}</div>
+                    <div class="day-date">${date.getDate()}/${(date.getMonth() + 1).toString().padStart(2, '0')}</div>
+                    <div class="day-status ${isAvailable ? 'available-status' : 'occupied-status'}">
+                        ${isAvailable ? `${availableCount} vagas` : 'Ocupado'}
+                    </div>
+                `;
+                
+                daysGrid.appendChild(dayCard);
+            });
+        }
+        
+        function selectDay(day, dayElement) {
+            // Remove seleção anterior
+            document.querySelectorAll('.day-card').forEach(card => {
+                card.classList.remove('selected');
+            });
+            
+            // Seleciona o dia
+            dayElement.classList.add('selected');
+            selectedDay = day;
+            
+            // Mostra horários disponíveis
+            showTimeSlots(day);
+        }
+        
+        function showTimeSlots(day) {
+            const timeSlots = document.getElementById('time-slots');
+            const timeGrid = document.getElementById('time-grid');
+            
+            timeGrid.innerHTML = '';
+            
+            const occupiedToday = occupiedSlots[day] || [];
+            
+            availableHours.forEach(time => {
+                const isOccupied = occupiedToday.includes(time);
+                
+                const timeSlot = document.createElement('div');
+                timeSlot.className = `time-slot ${isOccupied ? 'occupied' : ''}`;
+                timeSlot.textContent = time;
+                
+                if (!isOccupied) {
+                    timeSlot.onclick = () => selectTime(time, timeSlot);
+                }
+                
+                timeGrid.appendChild(timeSlot);
+            });
+            
+            timeSlots.classList.add('show');
+        }
+        
+        function selectTime(time, timeElement) {
+            // Remove seleção anterior
+            document.querySelectorAll('.time-slot').forEach(slot => {
+                slot.classList.remove('selected');
+            });
+            
+            // Seleciona o horário
+            timeElement.classList.add('selected');
+            selectedTime = time;
+            
+            updateContinueButton();
+        }
+
+        function updateContinueButton() {
+            const continueBtn = document.querySelector('.btn-continuar');
+            
+            if (selectedOption && selectedDay && selectedTime) {
+                continueBtn.disabled = false;
+                continueBtn.textContent = 'Continuar';
+                continueBtn.onclick = showConfirmationModal;
+            } else if (selectedOption && !selectedDay) {
+                continueBtn.disabled = true;
+                continueBtn.textContent = 'Selecione um dia';
+            } else if (selectedOption && selectedDay && !selectedTime) {
+                continueBtn.disabled = true;
+                continueBtn.textContent = 'Selecione um horário';
+            } else {
+                continueBtn.disabled = true;
+                continueBtn.textContent = 'Selecione uma quadra';
+            }
+        }
+        
+        function showConfirmationModal() {
+            const modal = document.getElementById('confirmationModal');
+            const summary = document.getElementById('reservation-summary');
+            
+            const dayNames = {
+                'domingo': 'Domingo', 'segunda': 'Segunda-feira', 'terca': 'Terça-feira',
+                'quarta': 'Quarta-feira', 'quinta': 'Quinta-feira', 'sexta': 'Sexta-feira', 'sabado': 'Sábado'
+            };
+            
+            summary.innerHTML = `
+                <div class="summary-row">
+                    <span class="summary-label">Quadra:</span>
+                    <span class="summary-value">${selectedOption.toUpperCase()}</span>
+                </div>
+                <div class="summary-row">
+                    <span class="summary-label">Dia:</span>
+                    <span class="summary-value">${dayNames[selectedDay]}</span>
+                </div>
+                <div class="summary-row">
+                    <span class="summary-label">Horário:</span>
+                    <span class="summary-value">${selectedTime}</span>
+                </div>
+                <div class="summary-row">
+                    <span class="summary-label">Duração:</span>
+                    <span class="summary-value">1 hora</span>
+                </div>
+                <div class="summary-row">
+                    <span class="summary-label">Preço:</span>
+                    <span class="summary-value">R$ 80</span>
+                </div>
+            `;
+            
+            modal.classList.add('show');
+            document.body.style.overflow = 'hidden';
+        }
+        
+        function selectPayment(paymentType) {
+            document.querySelectorAll('.payment-option').forEach(option => {
+                option.classList.remove('selected');
+            });
+            
+            event.target.closest('.payment-option').classList.add('selected');
+            selectedPayment = paymentType;
+            
+            updateConfirmButton();
+        }
+        
+        function updateConfirmButton() {
+            const confirmBtn = document.getElementById('btn-confirmar');
+            const numPeople = document.getElementById('num-people').value;
+            
+            if (selectedPayment && numPeople && numPeople > 0) {
+                confirmBtn.disabled = false;
+            } else {
+                confirmBtn.disabled = true;
+            }
+        }
+        
+        function closeModal() {
+            const modal = document.getElementById('confirmationModal');
+            modal.classList.remove('show');
+            document.body.style.overflow = 'auto';
+        }
+        
+        function confirmReservation() {
+            const numPeople = document.getElementById('num-people').value;
+            
+            if (!selectedPayment || !numPeople) {
+                alert('Por favor, preencha todos os campos obrigatórios.');
+                return;
+            }
+            
+            const paymentNames = {
+                'pix': 'PIX',
+                'cartao': 'Cartão',
+                'local': 'Pagamento no Local'
+            };
+            
+            alert(`Reserva confirmada!
+            
+Quadra: ${selectedOption.toUpperCase()}
+Dia: ${selectedDay}
+Horário: ${selectedTime}
+Pessoas: ${numPeople}
+Pagamento: ${paymentNames[selectedPayment]}
+            
+Você receberá um e-mail de confirmação.`);
+            
+            closeModal();
+        }
+        
+        // Event listener para número de pessoas
+        document.getElementById('num-people').addEventListener('input', updateConfirmButton);
+        
+        // Fechar modal clicando fora
+        document.getElementById('confirmationModal').addEventListener('click', function(e) {
+            if (e.target === this) {
+                closeModal();
+            }
+        });
+        
+        // Funcionalidade de busca
+        const searchInput = document.querySelector('.search-input');
+        searchInput.addEventListener('input', function(e) {
+            const searchTerm = e.target.value.toLowerCase();
+            const courtItems = document.querySelectorAll('.court-item');
+            
+            courtItems.forEach(item => {
+                const courtName = item.querySelector('h3').textContent.toLowerCase();
+                
+                if (courtName.includes(searchTerm)) {
+                    item.style.display = 'flex';
+                } else {
+                    item.style.display = 'none';
+                }
+            });
+        });
+    </script>
+</body>
+</html>
