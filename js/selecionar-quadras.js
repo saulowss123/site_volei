@@ -202,10 +202,38 @@ function selectTime(time, timeElement) {
     // Atualiza resumo
     updateTimeSummary();
     
+    // Salva a reserva pendente para o admin
+    saveReservationForAdmin();
+    
     // Avança para tela de login
     setTimeout(() => {
         goToStep('step-login');
     }, 500);
+}
+
+function saveReservationForAdmin() {
+    const reservation = {
+        id: Date.now(),
+        court: courtsInfo[selectedCourt],
+        day: selectedDay,
+        time: selectedTime,
+        user: {
+            name: 'João Silva',
+            email: 'joao.silva@email.com',
+            phone: '(17) 99999-9999',
+            whatsapp: '5517999999999'
+        },
+        players: 4,
+        paymentMethod: 'pix',
+        status: 'pending',
+        created: new Date().toISOString(),
+        price: 80
+    };
+    
+    // Salva no localStorage para simular banco de dados
+    const pendingReservations = JSON.parse(localStorage.getItem('pendingReservations') || '[]');
+    pendingReservations.push(reservation);
+    localStorage.setItem('pendingReservations', JSON.stringify(pendingReservations));
 }
 
 // Funções de atualização do resumo

@@ -1,0 +1,307 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Arena Copacabana - Administração</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="css/global.css">
+    <link rel="stylesheet" href="css/admin.css">
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <div class="header-container">
+            <div class="header-left">
+                <a href="index.html" class="btn-voltar">
+                    <i class="fas fa-arrow-left"></i>
+                    Início
+                </a>
+                <div class="logo">ARENA COPACABANA - ADMIN</div>
+            </div>
+            <div class="header-buttons">
+                <div class="admin-menu">
+                    <span class="admin-name">Administrador</span>
+                    <button class="btn-logout" onclick="logout()">
+                        <i class="fas fa-sign-out-alt"></i>
+                        Sair
+                    </button>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Container Principal -->
+    <div class="main-container">
+        <!-- Sidebar de Navegação -->
+        <div class="sidebar">
+            <div class="admin-profile">
+                <div class="admin-avatar">
+                    <i class="fas fa-user-shield"></i>
+                </div>
+                <h3>Administrador</h3>
+                <p>Sistema de Gestão</p>
+            </div>
+            
+            <nav class="sidebar-nav">
+                <button class="nav-item active" data-section="dashboard">
+                    <i class="fas fa-tachometer-alt"></i>
+                    Dashboard
+                </button>
+                <button class="nav-item" data-section="reservas">
+                    <i class="fas fa-calendar-check"></i>
+                    Reservas
+                </button>
+                <button class="nav-item" data-section="quadras">
+                    <i class="fas fa-volleyball-ball"></i>
+                    Quadras
+                </button>
+                <button class="nav-item" data-section="precos">
+                    <i class="fas fa-dollar-sign"></i>
+                    Preços
+                </button>
+                <button class="nav-item" data-section="horarios">
+                    <i class="fas fa-clock"></i>
+                    Horários
+                </button>
+                <button class="nav-item" data-section="modalidades">
+                    <i class="fas fa-gamepad"></i>
+                    Modalidades
+                </button>
+                <button class="nav-item" data-section="usuarios">
+                    <i class="fas fa-users"></i>
+                    Usuários
+                </button>
+            </nav>
+        </div>
+
+        <!-- Conteúdo Principal -->
+        <div class="content">
+            <!-- Dashboard -->
+            <div class="section active" id="dashboard">
+                <div class="section-header">
+                    <h2><i class="fas fa-tachometer-alt"></i> Dashboard</h2>
+                </div>
+                
+                <div class="dashboard-cards">
+                    <div class="dashboard-card pending">
+                        <div class="card-icon">
+                            <i class="fas fa-hourglass-half"></i>
+                        </div>
+                        <div class="card-content">
+                            <h3 id="pending-count">5</h3>
+                            <p>Reservas Pendentes</p>
+                        </div>
+                    </div>
+                    
+                    <div class="dashboard-card confirmed">
+                        <div class="card-icon">
+                            <i class="fas fa-check-circle"></i>
+                        </div>
+                        <div class="card-content">
+                            <h3 id="confirmed-count">12</h3>
+                            <p>Reservas Confirmadas</p>
+                        </div>
+                    </div>
+                    
+                    <div class="dashboard-card revenue">
+                        <div class="card-icon">
+                            <i class="fas fa-money-bill-wave"></i>
+                        </div>
+                        <div class="card-content">
+                            <h3>R$ 1.360</h3>
+                            <p>Receita do Mês</p>
+                        </div>
+                    </div>
+                    
+                    <div class="dashboard-card users">
+                        <div class="card-icon">
+                            <i class="fas fa-user-friends"></i>
+                        </div>
+                        <div class="card-content">
+                            <h3>48</h3>
+                            <p>Usuários Ativos</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Reservas Recentes -->
+                <div class="recent-reservations">
+                    <h3>Reservas Recentes</h3>
+                    <div class="reservations-table">
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>Cliente</th>
+                                    <th>Quadra</th>
+                                    <th>Data/Hora</th>
+                                    <th>Status</th>
+                                    <th>Ações</th>
+                                </tr>
+                            </thead>
+                            <tbody id="recent-reservations-table">
+                                <!-- Será preenchido dinamicamente -->
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Gerenciar Reservas -->
+            <div class="section" id="reservas">
+                <div class="section-header">
+                    <h2><i class="fas fa-calendar-check"></i> Gerenciar Reservas</h2>
+                    <div class="header-filters">
+                        <select id="reservation-filter">
+                            <option value="all">Todas as Reservas</option>
+                            <option value="pending">Pendentes</option>
+                            <option value="confirmed">Confirmadas</option>
+                            <option value="cancelled">Canceladas</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="reservations-grid" id="admin-reservations-list">
+                    <!-- Reservas serão carregadas dinamicamente -->
+                </div>
+            </div>
+
+            <!-- Gerenciar Quadras -->
+            <div class="section" id="quadras">
+                <div class="section-header">
+                    <h2><i class="fas fa-volleyball-ball"></i> Gerenciar Quadras</h2>
+                    <button class="btn-add" onclick="showAddCourtModal()">
+                        <i class="fas fa-plus"></i> Nova Quadra
+                    </button>
+                </div>
+
+                <div class="courts-management" id="courts-management">
+                    <!-- Quadras serão carregadas dinamicamente -->
+                </div>
+            </div>
+
+            <!-- Gerenciar Preços -->
+            <div class="section" id="precos">
+                <div class="section-header">
+                    <h2><i class="fas fa-dollar-sign"></i> Gerenciar Preços</h2>
+                </div>
+
+                <div class="prices-grid">
+                    <div class="price-card">
+                        <h3>Preço por Hora</h3>
+                        <div class="price-input">
+                            <span>R$</span>
+                            <input type="number" id="hourly-price" value="80" min="0" step="0.01">
+                        </div>
+                        <button class="btn-save-price" onclick="saveHourlyPrice()">Salvar</button>
+                    </div>
+
+                    <div class="price-card">
+                        <h3>Plano Mensal</h3>
+                        <div class="price-input">
+                            <span>R$</span>
+                            <input type="number" id="monthly-price" value="89.90" min="0" step="0.01">
+                        </div>
+                        <button class="btn-save-price" onclick="saveMonthlyPrice()">Salvar</button>
+                    </div>
+
+                    <div class="price-card">
+                        <h3>Desconto Premium</h3>
+                        <div class="price-input">
+                            <input type="number" id="premium-discount" value="20" min="0" max="100">
+                            <span>%</span>
+                        </div>
+                        <button class="btn-save-price" onclick="savePremiumDiscount()">Salvar</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Gerenciar Horários -->
+            <div class="section" id="horarios">
+                <div class="section-header">
+                    <h2><i class="fas fa-clock"></i> Gerenciar Horários</h2>
+                </div>
+
+                <div class="schedule-management">
+                    <div class="schedule-grid">
+                        <div class="day-schedule" data-day="domingo">
+                            <h3>Domingo</h3>
+                            <div class="time-slots" id="domingo-slots"></div>
+                            <button class="btn-add-slot" onclick="addTimeSlot('domingo')">
+                                <i class="fas fa-plus"></i> Adicionar Horário
+                            </button>
+                        </div>
+                        <!-- Outros dias serão gerados dinamicamente -->
+                    </div>
+                </div>
+            </div>
+
+            <!-- Gerenciar Modalidades -->
+            <div class="section" id="modalidades">
+                <div class="section-header">
+                    <h2><i class="fas fa-gamepad"></i> Gerenciar Modalidades</h2>
+                    <button class="btn-add" onclick="showAddModalityModal()">
+                        <i class="fas fa-plus"></i> Nova Modalidade
+                    </button>
+                </div>
+
+                <div class="modalities-grid" id="modalities-grid">
+                    <!-- Modalidades serão carregadas dinamicamente -->
+                </div>
+            </div>
+
+            <!-- Gerenciar Usuários -->
+            <div class="section" id="usuarios">
+                <div class="section-header">
+                    <h2><i class="fas fa-users"></i> Gerenciar Usuários</h2>
+                </div>
+
+                <div class="users-table">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Nome</th>
+                                <th>Email</th>
+                                <th>Telefone</th>
+                                <th>Plano</th>
+                                <th>Cadastro</th>
+                                <th>Ações</th>
+                            </tr>
+                        </thead>
+                        <tbody id="users-table">
+                            <!-- Usuários serão carregados dinamicamente -->
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal - Detalhes da Reserva -->
+    <div class="modal" id="reservationModal">
+        <div class="modal-content large">
+            <div class="modal-header">
+                <h3>Detalhes da Reserva</h3>
+                <button class="modal-close" onclick="closeReservationModal()">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+            <div class="modal-body" id="reservation-details">
+                <!-- Detalhes serão carregados dinamicamente -->
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer>
+        <div class="footer-content">
+            <div class="logo" style="color: var(--primary); margin-bottom: 15px;">ARENA COPACABANA - ADMIN</div>
+            <div class="footer-credits">
+                <p>© Copyright 2012 — 2025. Todos os direitos reservados.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="js/admin.js"></script>
+</body>
+</html>

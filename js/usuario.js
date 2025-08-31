@@ -9,10 +9,10 @@ const userData = {
 
 // Dados simulados de reservas
 const reservationsData = [
-    { id: 1, court: 'Quadra 01', sport: 'Vôlei de Praia', date: '2025-01-10', time: '18:00-19:00', status: 'confirmed', price: 80 },
-    { id: 2, court: 'Quadra 03', sport: 'Futevôlei', date: '2025-01-11', time: '19:00-20:00', status: 'confirmed', price: 80 },
-    { id: 3, court: 'Quadra 02', sport: 'Beach Tênis', date: '2025-01-12', time: '20:00-21:00', status: 'pending', price: 80 },
-    { id: 4, court: 'Quadra 04', sport: 'Vôlei de Praia', date: '2025-01-08', time: '17:00-18:00', status: 'cancelled', price: 80 }
+    { id: 1, court: 'Quadra 01', sport: 'Vôlei de Praia', date: '2025-01-10', time: '18:00-19:00', status: 'confirmed', price: 80, user: { name: 'João Silva', email: 'joao.silva@email.com', phone: '(17) 99999-9999', whatsapp: '5517999999999' }, players: 4, paymentMethod: 'pix' },
+    { id: 2, court: 'Quadra 03', sport: 'Futevôlei', date: '2025-01-11', time: '19:00-20:00', status: 'confirmed', price: 80, user: { name: 'João Silva', email: 'joao.silva@email.com', phone: '(17) 99999-9999', whatsapp: '5517999999999' }, players: 2, paymentMethod: 'cartao' },
+    { id: 3, court: 'Quadra 02', sport: 'Beach Tênis', date: '2025-01-12', time: '20:00-21:00', status: 'pending', price: 80, user: { name: 'Maria Santos', email: 'maria.santos@email.com', phone: '(17) 88888-8888', whatsapp: '5517888888888' }, players: 4, paymentMethod: 'dinheiro' },
+    { id: 4, court: 'Quadra 04', sport: 'Vôlei de Praia', date: '2025-01-08', time: '17:00-18:00', status: 'cancelled', price: 80, user: { name: 'Pedro Costa', email: 'pedro.costa@email.com', phone: '(17) 77777-7777', whatsapp: '5517777777777' }, players: 6, paymentMethod: 'pix' }
 ];
 
 // Dados simulados de times
