@@ -1,0 +1,330 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Arena Copacabana - Minha Conta</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="css/global.css">
+    <link rel="stylesheet" href="css/usuario.css">
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <div class="header-container">
+            <div class="header-left">
+                <a href="index.html" class="btn-voltar">
+                    <i class="fas fa-arrow-left"></i>
+                    Início
+                </a>
+                <div class="logo">ARENA COPACABANA</div>
+            </div>
+            <div class="header-buttons">
+                <div class="user-menu">
+                    <span class="user-name">João Silva</span>
+                    <button class="btn-logout" onclick="logout()">
+                        <i class="fas fa-sign-out-alt"></i>
+                        Sair
+                    </button>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Container Principal -->
+    <div class="main-container">
+        <!-- Sidebar de Navegação -->
+        <div class="sidebar">
+            <div class="user-profile">
+                <div class="user-avatar">
+                    <i class="fas fa-user"></i>
+                </div>
+                <h3>João Silva</h3>
+                <p>joao.silva@email.com</p>
+            </div>
+            
+            <nav class="sidebar-nav">
+                <button class="nav-item active" data-section="dashboard">
+                    <i class="fas fa-tachometer-alt"></i>
+                    Dashboard
+                </button>
+                <button class="nav-item" data-section="reservas">
+                    <i class="fas fa-calendar-check"></i>
+                    Minhas Reservas
+                </button>
+                <button class="nav-item" data-section="planos">
+                    <i class="fas fa-crown"></i>
+                    Meu Plano
+                </button>
+                <button class="nav-item" data-section="times">
+                    <i class="fas fa-users"></i>
+                    Meus Times
+                </button>
+                <button class="nav-item" data-section="perfil">
+                    <i class="fas fa-user-cog"></i>
+                    Perfil
+                </button>
+            </nav>
+        </div>
+
+        <!-- Conteúdo Principal -->
+        <div class="content">
+            <!-- Dashboard -->
+            <div class="section active" id="dashboard">
+                <div class="section-header">
+                    <h2><i class="fas fa-tachometer-alt"></i> Dashboard</h2>
+                </div>
+                
+                <div class="dashboard-cards">
+                    <div class="dashboard-card">
+                        <div class="card-icon">
+                            <i class="fas fa-calendar-check"></i>
+                        </div>
+                        <div class="card-content">
+                            <h3>3</h3>
+                            <p>Reservas Ativas</p>
+                        </div>
+                    </div>
+                    
+                    <div class="dashboard-card">
+                        <div class="card-icon">
+                            <i class="fas fa-clock"></i>
+                        </div>
+                        <div class="card-content">
+                            <h3>12</h3>
+                            <p>Horas Jogadas</p>
+                        </div>
+                    </div>
+                    
+                    <div class="dashboard-card">
+                        <div class="card-icon">
+                            <i class="fas fa-users"></i>
+                        </div>
+                        <div class="card-content">
+                            <h3>2</h3>
+                            <p>Times Criados</p>
+                        </div>
+                    </div>
+                    
+                    <div class="dashboard-card">
+                        <div class="card-icon">
+                            <i class="fas fa-crown"></i>
+                        </div>
+                        <div class="card-content">
+                            <h3>Premium</h3>
+                            <p>Plano Atual</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Próximas Reservas -->
+                <div class="upcoming-reservations">
+                    <h3>Próximas Reservas</h3>
+                    <div class="reservation-list">
+                        <div class="reservation-item">
+                            <div class="reservation-info">
+                                <h4>Quadra 01 - Vôlei de Praia</h4>
+                                <p><i class="fas fa-calendar"></i> Hoje, 18:00 - 19:00</p>
+                                <span class="status confirmed">Confirmada</span>
+                            </div>
+                            <button class="btn-details">Detalhes</button>
+                        </div>
+                        
+                        <div class="reservation-item">
+                            <div class="reservation-info">
+                                <h4>Quadra 03 - Futevôlei</h4>
+                                <p><i class="fas fa-calendar"></i> Amanhã, 19:00 - 20:00</p>
+                                <span class="status confirmed">Confirmada</span>
+                            </div>
+                            <button class="btn-details">Detalhes</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Minhas Reservas -->
+            <div class="section" id="reservas">
+                <div class="section-header">
+                    <h2><i class="fas fa-calendar-check"></i> Minhas Reservas</h2>
+                    <a href="selecionar-quadras.html" class="btn-new-reservation">
+                        <i class="fas fa-plus"></i> Nova Reserva
+                    </a>
+                </div>
+
+                <div class="reservations-filter">
+                    <button class="filter-btn active" data-filter="all">Todas</button>
+                    <button class="filter-btn" data-filter="confirmed">Confirmadas</button>
+                    <button class="filter-btn" data-filter="pending">Pendentes</button>
+                    <button class="filter-btn" data-filter="cancelled">Canceladas</button>
+                </div>
+
+                <div class="reservations-grid" id="reservations-list">
+                    <!-- Reservas serão carregadas dinamicamente -->
+                </div>
+            </div>
+
+            <!-- Meu Plano -->
+            <div class="section" id="planos">
+                <div class="section-header">
+                    <h2><i class="fas fa-crown"></i> Meu Plano</h2>
+                </div>
+
+                <div class="current-plan">
+                    <div class="plan-card premium">
+                        <div class="plan-header">
+                            <h3><i class="fas fa-crown"></i> Premium</h3>
+                            <div class="plan-price">R$ 89,90/mês</div>
+                        </div>
+                        <div class="plan-content">
+                            <div class="plan-info">
+                                <p><strong>Próximo vencimento:</strong> 15/02/2025</p>
+                                <div class="days-remaining">
+                                    <i class="fas fa-exclamation-triangle"></i>
+                                    Vence em 5 dias
+                                </div>
+                            </div>
+                            <div class="plan-benefits">
+                                <ul>
+                                    <li><i class="fas fa-check"></i> Reservas ilimitadas</li>
+                                    <li><i class="fas fa-check"></i> 20% desconto em todas as quadras</li>
+                                    <li><i class="fas fa-check"></i> Cancelamento gratuito</li>
+                                    <li><i class="fas fa-check"></i> Times ilimitados</li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="plan-actions">
+                            <button class="btn-renew">Renovar Plano</button>
+                            <button class="btn-change">Alterar Plano</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Meus Times -->
+            <div class="section" id="times">
+                <div class="section-header">
+                    <h2><i class="fas fa-users"></i> Meus Times</h2>
+                    <button class="btn-new-team" onclick="showCreateTeamModal()">
+                        <i class="fas fa-plus"></i> Criar Time
+                    </button>
+                </div>
+
+                <div class="teams-grid" id="teams-list">
+                    <!-- Times serão carregados dinamicamente -->
+                </div>
+            </div>
+
+            <!-- Perfil -->
+            <div class="section" id="perfil">
+                <div class="section-header">
+                    <h2><i class="fas fa-user-cog"></i> Meu Perfil</h2>
+                </div>
+
+                <div class="profile-form">
+                    <form id="profile-form">
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="profile-name">Nome Completo</label>
+                                <input type="text" id="profile-name" value="João Silva" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="profile-email">E-mail</label>
+                                <input type="email" id="profile-email" value="joao.silva@email.com" required>
+                            </div>
+                        </div>
+                        
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="profile-phone">Telefone</label>
+                                <input type="tel" id="profile-phone" value="(17) 99999-9999" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="profile-birth">Data de Nascimento</label>
+                                <input type="date" id="profile-birth" value="1990-01-01">
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="profile-password">Nova Senha</label>
+                            <input type="password" id="profile-password" placeholder="Deixe em branco para não alterar">
+                        </div>
+
+                        <div class="form-actions">
+                            <button type="submit" class="btn-save">Salvar Alterações</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal - Criar Time -->
+    <div class="modal" id="createTeamModal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3>Criar Novo Time</h3>
+                <button class="modal-close" onclick="closeCreateTeamModal()">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form id="create-team-form">
+                    <div class="form-group">
+                        <label for="team-name">Nome do Time</label>
+                        <input type="text" id="team-name" placeholder="Digite o nome do time" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="team-sport">Modalidade</label>
+                        <select id="team-sport" required>
+                            <option value="">Selecione a modalidade</option>
+                            <option value="volei">Vôlei de Praia</option>
+                            <option value="beach">Beach Tênis</option>
+                            <option value="futevolei">Futevôlei</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="total-players">Total de Jogadores</label>
+                        <input type="number" id="total-players" min="2" max="20" value="6" required>
+                    </div>
+
+                    <div class="players-section">
+                        <h4>Adicionar Jogadores</h4>
+                        <div class="add-player">
+                            <input type="text" id="player-name" placeholder="Nome do jogador">
+                            <button type="button" onclick="addPlayer()">
+                                <i class="fas fa-plus"></i> Adicionar
+                            </button>
+                        </div>
+                        <div class="players-list" id="players-list">
+                            <!-- Jogadores serão adicionados aqui -->
+                        </div>
+                    </div>
+
+                    <div class="cost-division" id="cost-division">
+                        <!-- Divisão de custos será mostrada aqui -->
+                    </div>
+
+                    <div class="modal-actions">
+                        <button type="button" class="btn-cancel" onclick="closeCreateTeamModal()">Cancelar</button>
+                        <button type="submit" class="btn-create">Criar Time</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer>
+        <div class="footer-content">
+            <div class="logo" style="color: var(--primary); margin-bottom: 15px;">ARENA COPACABANA</div>
+            <div class="footer-credits">
+                <p>© Copyright 2012 — 2025. Todos os direitos reservados.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="js/usuario.js"></script>
+</body>
+</html>

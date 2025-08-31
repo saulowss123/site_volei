@@ -1,0 +1,1009 @@
+/* Layout Principal */
+.main-container {
+    display: grid;
+    grid-template-columns: 280px 1fr;
+    min-height: calc(100vh - 140px);
+    max-width: 1400px;
+    margin: 0 auto;
+    gap: 0;
+}
+
+/* Header específico */
+.user-menu {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+
+.user-name {
+    color: var(--light);
+    font-weight: 600;
+}
+
+.btn-logout {
+    background: none;
+    border: 2px solid var(--primary);
+    color: var(--primary);
+    padding: 8px 15px;
+    border-radius: 20px;
+    cursor: pointer;
+    transition: var(--transition);
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    font-weight: 500;
+}
+
+.btn-logout:hover {
+    background-color: var(--primary);
+    color: white;
+}
+
+/* Sidebar */
+.sidebar {
+    background: linear-gradient(135deg, var(--dark) 0%, #333 100%);
+    color: var(--light);
+    padding: 30px 0;
+    position: sticky;
+    top: 0;
+    height: fit-content;
+}
+
+.user-profile {
+    text-align: center;
+    padding: 20px;
+    border-bottom: 1px solid rgba(255,255,255,0.1);
+    margin-bottom: 30px;
+}
+
+.user-avatar {
+    width: 80px;
+    height: 80px;
+    background: linear-gradient(135deg, var(--primary), #e64a19);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto 15px;
+    font-size: 28px;
+    color: white;
+    box-shadow: 0 8px 25px rgba(255, 87, 34, 0.3);
+}
+
+.user-profile h3 {
+    margin-bottom: 5px;
+    color: var(--primary);
+}
+
+.user-profile p {
+    color: var(--gray);
+    font-size: 14px;
+}
+
+/* Navegação da Sidebar */
+.sidebar-nav {
+    padding: 0 20px;
+}
+
+.nav-item {
+    width: 100%;
+    background: none;
+    border: none;
+    color: var(--light);
+    padding: 15px 20px;
+    text-align: left;
+    cursor: pointer;
+    transition: var(--transition);
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    border-radius: 8px;
+    margin-bottom: 8px;
+    font-size: 14px;
+    font-weight: 500;
+}
+
+.nav-item:hover {
+    background-color: rgba(255,255,255,0.1);
+    transform: translateX(5px);
+}
+
+.nav-item.active {
+    background: linear-gradient(135deg, var(--primary), #e64a19);
+    box-shadow: 0 5px 15px rgba(255, 87, 34, 0.4);
+}
+
+.nav-item i {
+    width: 20px;
+    text-align: center;
+}
+
+/* Conteúdo Principal */
+.content {
+    background-color: #f8f9fa;
+    padding: 40px;
+    overflow-y: auto;
+}
+
+.section {
+    display: none;
+    animation: fadeIn 0.5s ease;
+}
+
+.section.active {
+    display: block;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+.section-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 30px;
+    padding-bottom: 15px;
+    border-bottom: 3px solid var(--primary);
+}
+
+.section-header h2 {
+    color: var(--dark);
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.section-header i {
+    color: var(--primary);
+}
+
+/* Dashboard Cards */
+.dashboard-cards {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 25px;
+    margin-bottom: 40px;
+}
+
+.dashboard-card {
+    background: white;
+    border-radius: 15px;
+    padding: 30px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    transition: var(--transition);
+    position: relative;
+    overflow: hidden;
+}
+
+.dashboard-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 4px;
+    background: linear-gradient(135deg, var(--primary), #e64a19);
+}
+
+.dashboard-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 20px 40px rgba(0,0,0,0.15);
+}
+
+.card-icon {
+    width: 60px;
+    height: 60px;
+    background: linear-gradient(135deg, var(--primary), #e64a19);
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    font-size: 24px;
+    box-shadow: 0 8px 20px rgba(255, 87, 34, 0.3);
+}
+
+.card-content h3 {
+    font-size: 28px;
+    color: var(--dark);
+    margin-bottom: 5px;
+}
+
+.card-content p {
+    color: var(--gray);
+    font-weight: 500;
+}
+
+/* Próximas Reservas */
+.upcoming-reservations {
+    background: white;
+    border-radius: 15px;
+    padding: 30px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+}
+
+.upcoming-reservations h3 {
+    color: var(--dark);
+    margin-bottom: 20px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.upcoming-reservations h3::before {
+    content: '';
+    width: 4px;
+    height: 20px;
+    background: linear-gradient(135deg, var(--primary), #e64a19);
+    border-radius: 2px;
+}
+
+.reservation-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px;
+    border-left: 4px solid var(--primary);
+    background-color: #f8f9fa;
+    border-radius: 8px;
+    margin-bottom: 15px;
+    transition: var(--transition);
+}
+
+.reservation-item:hover {
+    transform: translateX(5px);
+    box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+}
+
+.reservation-info h4 {
+    color: var(--dark);
+    margin-bottom: 8px;
+}
+
+.reservation-info p {
+    color: var(--gray);
+    font-size: 14px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.status {
+    padding: 4px 12px;
+    border-radius: 20px;
+    font-size: 12px;
+    font-weight: 600;
+    display: flex;
+    align-items: center;
+    gap: 5px;
+}
+
+.status.confirmed {
+    background-color: rgba(76, 175, 80, 0.2);
+    color: #4CAF50;
+}
+
+.btn-details {
+    padding: 8px 20px;
+    background-color: var(--primary);
+    color: white;
+    border: none;
+    border-radius: 20px;
+    cursor: pointer;
+    transition: var(--transition);
+    font-weight: 500;
+}
+
+.btn-details:hover {
+    background-color: #e64a19;
+    transform: translateY(-2px);
+}
+
+/* Botões de Ação */
+.btn-new-reservation,
+.btn-new-team {
+    padding: 12px 25px;
+    background: linear-gradient(135deg, var(--primary), #e64a19);
+    color: white;
+    text-decoration: none;
+    border: none;
+    border-radius: 25px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: var(--transition);
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    box-shadow: 0 5px 15px rgba(255, 87, 34, 0.3);
+}
+
+.btn-new-reservation:hover,
+.btn-new-team:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 10px 25px rgba(255, 87, 34, 0.4);
+}
+
+/* Filtros de Reservas */
+.reservations-filter {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 30px;
+    flex-wrap: wrap;
+}
+
+.filter-btn {
+    padding: 10px 20px;
+    background-color: white;
+    border: 2px solid #e0e0e0;
+    color: var(--gray);
+    border-radius: 25px;
+    cursor: pointer;
+    transition: var(--transition);
+    font-weight: 500;
+}
+
+.filter-btn.active,
+.filter-btn:hover {
+    background-color: var(--primary);
+    border-color: var(--primary);
+    color: white;
+}
+
+/* Grid de Reservas */
+.reservations-grid {
+    display: grid;
+    gap: 20px;
+}
+
+.reservation-card {
+    background: white;
+    border-radius: 15px;
+    padding: 25px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+    border-left: 5px solid var(--primary);
+    transition: var(--transition);
+}
+
+.reservation-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 20px 40px rgba(0,0,0,0.15);
+}
+
+.reservation-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 15px;
+}
+
+.reservation-header h4 {
+    color: var(--dark);
+}
+
+.reservation-details {
+    margin-bottom: 20px;
+}
+
+.reservation-details p {
+    color: var(--gray);
+    margin-bottom: 8px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.reservation-details i {
+    color: var(--primary);
+    width: 16px;
+}
+
+.reservation-actions {
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
+}
+
+.btn-cancel-reservation {
+    padding: 8px 16px;
+    background-color: #f44336;
+    color: white;
+    border: none;
+    border-radius: 20px;
+    cursor: pointer;
+    transition: var(--transition);
+    font-weight: 500;
+}
+
+.btn-cancel-reservation:hover {
+    background-color: #d32f2f;
+}
+
+/* Status das Reservas */
+.reservation-card.pending {
+    border-left-color: #ff9800;
+}
+
+.reservation-card.cancelled {
+    border-left-color: #f44336;
+    opacity: 0.7;
+}
+
+.status.pending {
+    background-color: rgba(255, 152, 0, 0.2);
+    color: #ff9800;
+}
+
+.status.cancelled {
+    background-color: rgba(244, 67, 54, 0.2);
+    color: #f44336;
+}
+
+/* Plano Atual */
+.current-plan {
+    max-width: 600px;
+}
+
+.plan-card {
+    background: white;
+    border-radius: 15px;
+    padding: 30px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+    position: relative;
+    overflow: hidden;
+}
+
+.plan-card.premium::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 5px;
+    background: linear-gradient(135deg, #FFD700, #FFA500);
+}
+
+.plan-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+.plan-header h3 {
+    color: var(--dark);
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.plan-header i {
+    color: #FFD700;
+}
+
+.plan-price {
+    font-size: 24px;
+    font-weight: bold;
+    color: var(--primary);
+}
+
+.plan-info {
+    margin-bottom: 25px;
+}
+
+.days-remaining {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    color: #ff9800;
+    font-weight: 600;
+    margin-top: 10px;
+    padding: 10px;
+    background-color: rgba(255, 152, 0, 0.1);
+    border-radius: 8px;
+}
+
+.plan-benefits ul {
+    list-style: none;
+    padding: 0;
+}
+
+.plan-benefits li {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 10px;
+    color: var(--dark);
+}
+
+.plan-benefits i {
+    color: #4CAF50;
+}
+
+.plan-actions {
+    display: flex;
+    gap: 15px;
+    margin-top: 25px;
+}
+
+.btn-renew,
+.btn-change {
+    padding: 12px 25px;
+    border: none;
+    border-radius: 25px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: var(--transition);
+}
+
+.btn-renew {
+    background: linear-gradient(135deg, var(--primary), #e64a19);
+    color: white;
+    flex: 1;
+}
+
+.btn-change {
+    background-color: transparent;
+    color: var(--gray);
+    border: 2px solid var(--gray);
+}
+
+.btn-renew:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 20px rgba(255, 87, 34, 0.3);
+}
+
+.btn-change:hover {
+    border-color: var(--primary);
+    color: var(--primary);
+}
+
+/* Times Grid */
+.teams-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+    gap: 25px;
+}
+
+.team-card {
+    background: white;
+    border-radius: 15px;
+    padding: 25px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+    transition: var(--transition);
+    border-left: 5px solid var(--primary);
+}
+
+.team-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 20px 40px rgba(0,0,0,0.15);
+}
+
+.team-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 15px;
+}
+
+.team-header h4 {
+    color: var(--dark);
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.team-sport {
+    background-color: rgba(255, 87, 34, 0.1);
+    color: var(--primary);
+    padding: 5px 12px;
+    border-radius: 20px;
+    font-size: 12px;
+    font-weight: 600;
+}
+
+.team-players {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin: 15px 0;
+}
+
+.player-tag {
+    background-color: #f8f9fa;
+    color: var(--dark);
+    padding: 5px 12px;
+    border-radius: 20px;
+    font-size: 12px;
+    border: 1px solid #e0e0e0;
+}
+
+.team-created {
+    color: var(--gray);
+    font-size: 14px;
+    margin-top: 15px;
+}
+
+.team-actions {
+    display: flex;
+    gap: 10px;
+    margin-top: 20px;
+}
+
+.btn-edit-team,
+.btn-delete-team {
+    padding: 8px 16px;
+    border: none;
+    border-radius: 20px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: var(--transition);
+}
+
+.btn-edit-team {
+    background-color: var(--primary);
+    color: white;
+    flex: 1;
+}
+
+.btn-delete-team {
+    background-color: #f44336;
+    color: white;
+}
+
+.btn-edit-team:hover {
+    background-color: #e64a19;
+}
+
+.btn-delete-team:hover {
+    background-color: #d32f2f;
+}
+
+/* Formulário de Perfil */
+.profile-form {
+    background: white;
+    border-radius: 15px;
+    padding: 30px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+    max-width: 800px;
+}
+
+.form-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+}
+
+.form-group {
+    margin-bottom: 25px;
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 8px;
+    font-weight: 600;
+    color: var(--dark);
+}
+
+.form-group input,
+.form-group select {
+    width: 100%;
+    padding: 15px;
+    border: 2px solid #e0e0e0;
+    border-radius: 8px;
+    font-size: 16px;
+    transition: var(--transition);
+}
+
+.form-group input:focus,
+.form-group select:focus {
+    border-color: var(--primary);
+    outline: none;
+    box-shadow: 0 0 0 3px rgba(255, 87, 34, 0.1);
+}
+
+.form-actions {
+    margin-top: 30px;
+}
+
+.btn-save {
+    padding: 15px 30px;
+    background: linear-gradient(135deg, var(--primary), #e64a19);
+    color: white;
+    border: none;
+    border-radius: 25px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: var(--transition);
+    box-shadow: 0 5px 15px rgba(255, 87, 34, 0.3);
+}
+
+.btn-save:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 10px 25px rgba(255, 87, 34, 0.4);
+}
+
+/* Modal */
+.modal {
+    display: none;
+    position: fixed;
+    z-index: 1000;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0,0,0,0.6);
+    animation: fadeIn 0.3s ease;
+}
+
+.modal.show {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+}
+
+.modal-content {
+    background: white;
+    border-radius: 15px;
+    width: 100%;
+    max-width: 600px;
+    max-height: 90vh;
+    overflow-y: auto;
+    animation: slideIn 0.3s ease;
+}
+
+@keyframes slideIn {
+    from { transform: translateY(-50px); opacity: 0; }
+    to { transform: translateY(0); opacity: 1; }
+}
+
+.modal-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 25px;
+    border-bottom: 2px solid #f0f0f0;
+}
+
+.modal-header h3 {
+    color: var(--dark);
+}
+
+.modal-close {
+    background: none;
+    border: none;
+    font-size: 20px;
+    color: var(--gray);
+    cursor: pointer;
+    transition: var(--transition);
+}
+
+.modal-close:hover {
+    color: var(--primary);
+}
+
+.modal-body {
+    padding: 25px;
+}
+
+/* Seção de Jogadores no Modal */
+.players-section {
+    margin: 25px 0;
+}
+
+.players-section h4 {
+    color: var(--dark);
+    margin-bottom: 15px;
+}
+
+.add-player {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 20px;
+}
+
+.add-player input {
+    flex: 1;
+    padding: 12px;
+    border: 2px solid #e0e0e0;
+    border-radius: 8px;
+    font-size: 16px;
+}
+
+.add-player button {
+    padding: 12px 20px;
+    background-color: var(--primary);
+    color: white;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: var(--transition);
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    font-weight: 500;
+}
+
+.add-player button:hover {
+    background-color: #e64a19;
+}
+
+.players-list {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    max-height: 200px;
+    overflow-y: auto;
+}
+
+.player-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 12px;
+    background-color: #f8f9fa;
+    border-radius: 8px;
+    border: 1px solid #e0e0e0;
+}
+
+.player-item button {
+    background: none;
+    border: none;
+    color: #f44336;
+    cursor: pointer;
+    padding: 5px;
+    border-radius: 3px;
+    transition: var(--transition);
+}
+
+.player-item button:hover {
+    background-color: rgba(244, 67, 54, 0.1);
+}
+
+/* Divisão de Custos */
+.cost-division {
+    margin: 25px 0;
+    padding: 20px;
+    background: linear-gradient(135deg, #f8f9fa 0%, #ffffff 100%);
+    border-radius: 10px;
+    border-left: 4px solid var(--primary);
+}
+
+.cost-division h4 {
+    color: var(--dark);
+    margin-bottom: 15px;
+}
+
+.cost-info p {
+    margin-bottom: 8px;
+    color: var(--dark);
+}
+
+.remainder-note {
+    color: var(--primary);
+    font-style: italic;
+    font-size: 14px;
+}
+
+/* Ações do Modal */
+.modal-actions {
+    display: flex;
+    gap: 15px;
+    margin-top: 30px;
+}
+
+.btn-cancel,
+.btn-create {
+    flex: 1;
+    padding: 12px 25px;
+    border: none;
+    border-radius: 25px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: var(--transition);
+}
+
+.btn-cancel {
+    background-color: transparent;
+    color: var(--gray);
+    border: 2px solid var(--gray);
+}
+
+.btn-create {
+    background: linear-gradient(135deg, var(--primary), #e64a19);
+    color: white;
+}
+
+.btn-cancel:hover {
+    border-color: var(--primary);
+    color: var(--primary);
+}
+
+.btn-create:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 20px rgba(255, 87, 34, 0.3);
+}
+
+/* Notificação de Plano */
+.plan-notification {
+    position: fixed;
+    top: 80px;
+    right: 20px;
+    z-index: 1000;
+    animation: slideInRight 0.5s ease;
+}
+
+@keyframes slideInRight {
+    from { transform: translateX(400px); }
+    to { transform: translateX(0); }
+}
+
+.notification-content {
+    background: linear-gradient(135deg, #ff9800, #f57c00);
+    color: white;
+    padding: 15px 20px;
+    border-radius: 10px;
+    box-shadow: 0 10px 30px rgba(255, 152, 0, 0.3);
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    max-width: 400px;
+}
+
+.notification-content button {
+    background: none;
+    border: none;
+    color: white;
+    cursor: pointer;
+    font-size: 16px;
+}
+
+/* Responsividade */
+@media (max-width: 768px) {
+    .main-container {
+        grid-template-columns: 1fr;
+    }
+    
+    .sidebar {
+        position: static;
+        height: auto;
+    }
+    
+    .content {
+        padding: 20px;
+    }
+    
+    .dashboard-cards {
+        grid-template-columns: 1fr;
+    }
+    
+    .form-row {
+        grid-template-columns: 1fr;
+    }
+    
+    .teams-grid {
+        grid-template-columns: 1fr;
+    }
+    
+    .reservation-actions,
+    .team-actions,
+    .plan-actions {
+        flex-direction: column;
+    }
+    
+    .user-menu {
+        flex-direction: column;
+        gap: 10px;
+    }
+    
+    .plan-notification {
+        top: 20px;
+        left: 20px;
+        right: 20px;
+    }
+}
